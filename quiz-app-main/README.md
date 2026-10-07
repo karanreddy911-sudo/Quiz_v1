@@ -6,7 +6,7 @@ A simple quiz web app used to demonstrate a full DevOps workflow with **Git, Git
 
 - **Login page**: username and password, with hashed passwords
 - **Subjects**: DSA, DevOps, Linux, Java, Math (5 questions each)
-- **Quiz per subject**: multiple-choice questions, a score, and a review showing the correct answers
+- **Quiz per subject**: multiple-choice questions, a score, and a review showing the correct ans
 
 **Demo accounts**
 
