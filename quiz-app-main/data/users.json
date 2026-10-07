@@ -1,0 +1,4 @@
+{
+  "admin": "scrypt:32768:8:1$g7sUBFGYdWxkYlif$b2f13dbde1dc548d7859df2941893efceda67f2575cb6c1ea3a34fadba0b165b6c9da46bca2423c1e96a796aaa46fa0f82eef7fb4510af581e5a02a615f34a15",
+  "student": "scrypt:32768:8:1$iWcG4950z39mrlEa$a2add9af336d400306391583d8602280692bc3b3ca76ee0590cdbf1a98eeecf7c37bff666f286be4c300ac4a713b60e68a8c89c70560935af4cad4e7fbba3a30"
+}

@@ -1,0 +1,12 @@
+# Run the quiz app locally:  docker compose up --build
+# Then open http://localhost:5000
+services:
+  quiz-app:
+    build:
+      context: .
+      target: production
+    image: quiz-app:local
+    container_name: quiz-app-local
+    ports:
+      - "5000:5000"
+    restart: unless-stopped

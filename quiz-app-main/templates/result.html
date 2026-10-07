@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Result - Quiz App{% endblock %}
+{% block content %}
+<section class="card center">
+  <p class="muted">{{ subject.name }}</p>
+  <h1>{{ current_user }}, you scored {{ score }} / {{ total }}</h1>
+  <p class="score">{{ percent }}%</p>
+  <p>
+    {% if percent >= 80 %}Excellent! Great work.
+    {% elif percent >= 50 %}Good job! A little more practice and you'll ace it.
+    {% else %}Keep learning - try again!{% endif %}
+  </p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('quiz', subject_id=subject.id) }}">Try Again</a>
+    <a class="button secondary" href="{{ url_for('subjects') }}">Choose Another Subject</a>
+  </div>
+</section>
+
+<h2>Review</h2>
+{% for item in review %}
+<div class="card review {{ 'correct' if item.correct else 'wrong' }}">
+  <p class="question">{{ loop.index }}. {{ item.question }}</p>
+  <p>Your answer: <strong>{{ item.chosen }}</strong></p>
+  {% if not item.correct %}<p>Correct answer: <strong>{{ item.answer }}</strong></p>{% endif %}
+</div>
+{% endfor %}
+{% endblock %}

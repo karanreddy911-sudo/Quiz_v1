@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ subject.name }} Quiz - Quiz App{% endblock %}
+{% block content %}
+<p class="muted"><a href="{{ url_for('subjects') }}">&larr; All subjects</a></p>
+<h1>{{ subject.name }} Quiz</h1>
+<form action="{{ url_for('submit', subject_id=subject.id) }}" method="post">
+  {% for q in subject.questions %}
+  <fieldset class="card">
+    <legend>Question {{ loop.index }} of {{ subject.questions|length }}</legend>
+    <p class="question">{{ q.question }}</p>
+    {% for option in q.options %}
+    <label class="option">
+      <input type="radio" name="q{{ q.id }}" value="{{ option }}">
+      <span>{{ option }}</span>
+    </label>
+    {% endfor %}
+  </fieldset>
+  {% endfor %}
+  <button type="submit" class="wide">Submit Answers</button>
+</form>
+{% endblock %}

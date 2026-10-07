@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Subjects - Quiz App{% endblock %}
+{% block content %}
+<h1>Choose a subject</h1>
+<div class="subjects">
+  {% for s in subjects %}
+  <a class="card subject" href="{{ url_for('quiz', subject_id=s.id) }}">
+    <h2>{{ s.name }}</h2>
+    <p>{{ s.description }}</p>
+    <span class="muted">{{ s.questions|length }} questions &rarr;</span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

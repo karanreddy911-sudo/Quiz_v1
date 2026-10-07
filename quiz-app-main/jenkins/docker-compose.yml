@@ -1,0 +1,19 @@
+# Start Jenkins:  docker compose -f jenkins/docker-compose.yml up -d --build
+# Then open http://localhost:8080
+services:
+  jenkins:
+    build: .
+    image: quiz-jenkins
+    container_name: jenkins
+    # root is needed to use the host's docker.sock (fine for a learning/demo setup)
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

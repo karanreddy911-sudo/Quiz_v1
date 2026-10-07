@@ -1,0 +1,189 @@
+{
+  "subjects": [
+    {
+      "id": "dsa",
+      "name": "DSA",
+      "description": "Data structures, algorithms and time complexity.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which data structure follows the LIFO (Last In, First Out) principle?",
+          "options": ["Queue", "Stack", "Array", "Tree"],
+          "answer": "Stack"
+        },
+        {
+          "id": 2,
+          "question": "What is the time complexity of binary search on a sorted array?",
+          "options": ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+          "answer": "O(log n)"
+        },
+        {
+          "id": 3,
+          "question": "Which data structure follows the FIFO (First In, First Out) principle?",
+          "options": ["Stack", "Heap", "Queue", "Graph"],
+          "answer": "Queue"
+        },
+        {
+          "id": 4,
+          "question": "What is the worst-case time complexity of Bubble Sort?",
+          "options": ["O(n)", "O(n log n)", "O(log n)", "O(n²)"],
+          "answer": "O(n²)"
+        },
+        {
+          "id": 5,
+          "question": "Which tree traversal visits the left subtree, then the root, then the right subtree?",
+          "options": ["Preorder", "Inorder", "Postorder", "Level order"],
+          "answer": "Inorder"
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "name": "DevOps",
+      "description": "Git, GitHub, Docker, Jenkins and CI/CD.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does CI stand for in CI/CD?",
+          "options": ["Code Inspection", "Continuous Integration", "Container Integration", "Cloud Infrastructure"],
+          "answer": "Continuous Integration"
+        },
+        {
+          "id": 2,
+          "question": "Which Git command uploads your local commits to a remote repository?",
+          "options": ["git pull", "git fetch", "git commit", "git push"],
+          "answer": "git push"
+        },
+        {
+          "id": 3,
+          "question": "Which command builds a Docker image from a Dockerfile?",
+          "options": ["docker build", "docker run", "docker pull", "docker commit"],
+          "answer": "docker build"
+        },
+        {
+          "id": 4,
+          "question": "Which file defines a Jenkins pipeline as code?",
+          "options": ["pom.xml", "Dockerfile", "Jenkinsfile", "pipeline.yml"],
+          "answer": "Jenkinsfile"
+        },
+        {
+          "id": 5,
+          "question": "What is a Docker container?",
+          "options": ["A virtual machine image", "A Git branch", "A Jenkins plugin", "A running instance of a Docker image"],
+          "answer": "A running instance of a Docker image"
+        }
+      ]
+    },
+    {
+      "id": "linux",
+      "name": "Linux",
+      "description": "Essential commands every engineer uses.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which command lists the files in a directory?",
+          "options": ["cd", "ls", "rm", "cat"],
+          "answer": "ls"
+        },
+        {
+          "id": 2,
+          "question": "Which command prints the current working directory?",
+          "options": ["pwd", "dir", "whoami", "echo"],
+          "answer": "pwd"
+        },
+        {
+          "id": 3,
+          "question": "Which command changes file permissions?",
+          "options": ["chown", "chmod", "mkdir", "touch"],
+          "answer": "chmod"
+        },
+        {
+          "id": 4,
+          "question": "Which command shows the running processes?",
+          "options": ["mv", "cp", "ps", "df"],
+          "answer": "ps"
+        },
+        {
+          "id": 5,
+          "question": "What does sudo do?",
+          "options": ["Deletes a user", "Runs a command as the administrator (root)", "Shuts down the system", "Switches to another directory"],
+          "answer": "Runs a command as the administrator (root)"
+        }
+      ]
+    },
+    {
+      "id": "java",
+      "name": "Java",
+      "description": "Core Java and object-oriented programming.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which keyword is used to inherit from a class in Java?",
+          "options": ["implements", "extends", "inherits", "super"],
+          "answer": "extends"
+        },
+        {
+          "id": 2,
+          "question": "Which method is the entry point of a Java program?",
+          "options": ["start()", "run()", "main()", "init()"],
+          "answer": "main()"
+        },
+        {
+          "id": 3,
+          "question": "What is the size of an int in Java?",
+          "options": ["8 bits", "16 bits", "32 bits", "64 bits"],
+          "answer": "32 bits"
+        },
+        {
+          "id": 4,
+          "question": "Which of these is NOT a primitive data type in Java?",
+          "options": ["int", "boolean", "char", "String"],
+          "answer": "String"
+        },
+        {
+          "id": 5,
+          "question": "What does JVM stand for?",
+          "options": ["Java Variable Method", "Java Virtual Machine", "Joint Virtual Memory", "Java Visual Model"],
+          "answer": "Java Virtual Machine"
+        }
+      ]
+    },
+    {
+      "id": "math",
+      "name": "Math",
+      "description": "Arithmetic, algebra and numbers.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is 12 × 8?",
+          "options": ["86", "96", "108", "92"],
+          "answer": "96"
+        },
+        {
+          "id": 2,
+          "question": "Solve for x: 2x + 6 = 14",
+          "options": ["3", "4", "5", "8"],
+          "answer": "4"
+        },
+        {
+          "id": 3,
+          "question": "What is the square root of 144?",
+          "options": ["11", "14", "12", "16"],
+          "answer": "12"
+        },
+        {
+          "id": 4,
+          "question": "What is 25% of 200?",
+          "options": ["25", "40", "75", "50"],
+          "answer": "50"
+        },
+        {
+          "id": 5,
+          "question": "Which of these is a prime number?",
+          "options": ["15", "21", "17", "27"],
+          "answer": "17"
+        }
+      ]
+    }
+  ]
+}

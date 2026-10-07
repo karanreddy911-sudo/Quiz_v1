@@ -1,0 +1,114 @@
+// CI/CD pipeline for the Quiz app
+// Flow: GitHub -> Jenkins -> test -> build Docker image -> deploy container -> smoke test
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name: 'PUSH_TO_DOCKERHUB', defaultValue: false,
+                     description: 'Also push the image to Docker Hub (needs a "dockerhub-creds" credential in Jenkins)')
+    }
+
+    environment {
+        IMAGE_NAME     = 'quiz-app'
+        CONTAINER_NAME = 'quiz-app'
+        APP_PORT       = '5000'
+    }
+
+    triggers {
+        // Check GitHub for new commits every ~2 minutes (works without a public Jenkins URL).
+        pollSCM('H/2 * * * *')
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                sh 'git log -1 --oneline'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Runs pytest inside the "test" stage of the Dockerfile
+                sh 'docker build --target test -t ${IMAGE_NAME}:test .'
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                sh '''
+                    docker build --target production \
+                        --build-arg APP_VERSION=${BUILD_NUMBER} \
+                        -t ${IMAGE_NAME}:${BUILD_NUMBER} \
+                        -t ${IMAGE_NAME}:latest .
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker rm -f ${CONTAINER_NAME} || true
+                    docker run -d --name ${CONTAINER_NAME} \
+                        -p ${APP_PORT}:5000 \
+                        --restart unless-stopped \
+                        ${IMAGE_NAME}:${BUILD_NUMBER}
+                '''
+            }
+        }
+
+        stage('Smoke Test') {
+            steps {
+                sh '''
+                    for i in $(seq 1 15); do
+                        if docker exec ${CONTAINER_NAME} python -c "import urllib.request; print(urllib.request.urlopen('http://localhost:5000/health').read().decode())" 2>/dev/null; then
+                            echo "App is healthy"
+                            exit 0
+                        fi
+                        echo "Waiting for app to start... ($i)"
+                        sleep 2
+                    done
+                    echo "App did not become healthy"
+                    docker logs ${CONTAINER_NAME}
+                    exit 1
+                '''
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            when { expression { params.PUSH_TO_DOCKERHUB } }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
+                                                  usernameVariable: 'DOCKER_USER',
+                                                  passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker tag ${IMAGE_NAME}:${BUILD_NUMBER} $DOCKER_USER/${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker tag ${IMAGE_NAME}:${BUILD_NUMBER} $DOCKER_USER/${IMAGE_NAME}:latest
+                        docker push $DOCKER_USER/${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker push $DOCKER_USER/${IMAGE_NAME}:latest
+                        docker logout
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Build #${BUILD_NUMBER} deployed. Open http://localhost:${APP_PORT}"
+        }
+        failure {
+            echo 'Pipeline failed - check the logs of the red stage above.'
+        }
+        always {
+            // Clean up dangling images so the disk does not fill up
+            sh 'docker image prune -f || true'
+        }
+    }
+}

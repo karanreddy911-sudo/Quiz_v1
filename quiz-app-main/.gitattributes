@@ -1,0 +1,4 @@
+# Keep Unix line endings so files work inside Linux containers and Jenkins
+* text=auto eol=lf
+*.png binary
+*.jpg binary
